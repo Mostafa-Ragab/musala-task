@@ -10,8 +10,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import useFlight from '../useFlights'
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 
-const Columns = () => {
-  const {handleEdit,handleDelete,handleRowClick, handleModelCange,handleEditPhoto,handleView,filteredRows} = useFlight()
+const Columns = ({handleEdit,handleDelete,handleRowClick, handleModelCange,handleEditPhoto,handleView,filteredRows}) => {
   const columns = [
     { field: "code", headerName: "Code" },
     {

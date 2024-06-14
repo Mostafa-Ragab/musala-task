@@ -13,13 +13,11 @@ import SearchIcon from "@mui/icons-material/Search";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import { IconButton } from "@mui/material";
-import useFlight from "../useFlights";
 import CardSmallScreen from "./Card/CardSmallScreen";
 import CardMediumScreen from "./Card/CardMediumScreen";
 import Columns from './columns'
 
-const FlightItems = ({ filteredRows }) => {
-  const { handleEdit, handleDelete, theme, handleEditPhoto, handleView } = useFlight();
+const FlightItems = ({ filteredRows,handleEdit, handleDelete, theme, handleEditPhoto, handleView }) => {
 
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const isMediumScreen = useMediaQuery(theme.breakpoints.between("sm", "md"));
@@ -81,7 +79,7 @@ const FlightItems = ({ filteredRows }) => {
     {
             (!isSmallScreen && !isMediumScreen) &&
             (
-             <Columns />
+             <Columns filteredRows={filteredRows} handleEdit={handleEdit} handleDelete={handleDelete} theme={theme} handleEditPhoto={handleEditPhoto} handleView={handleView} />
             )
     }
     </>

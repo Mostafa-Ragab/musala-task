@@ -1,48 +1,20 @@
 import { useState } from "react";
-import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
+import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Avatar, Box, IconButton, Typography, useTheme } from "@mui/material";
-import { Link } from "react-router-dom";
+import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../../theme";
 import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-
+import Item from './Item'
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-
-const Item = ({ title, to, icon, selected, setSelected }) => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
-  return (
-    <MenuItem
-      active={selected === title}
-      style={{
-        color: colors.grey[100],
-      }}
-      onClick={() => setSelected(title)}
-      icon={icon}
-    >
-      <Typography>{title}</Typography>
-      <Link to={to} />
-    </MenuItem>
-  );
-};
-
-const ProSidebar = () => {
+import {user} from '../../constants/index'
+const Sidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Flights Information");
 
-  const usuario = JSON.parse(localStorage.getItem('user'));
-
-  const user = {
-    avatar: PersonOutlinedIcon,
-    email: usuario ? usuario.email : '',
-    id: usuario ? usuario.id : '',
-    name: usuario ? usuario.name : '',
-    refreshToken: usuario ? usuario.passsword : '',
-    token: usuario ? usuario.token : ''
-  };
-
+  
   return (
     <Box
       sx={{
@@ -63,7 +35,7 @@ const ProSidebar = () => {
         },
       }}
     >
-      <Sidebar collapsed={isCollapsed}>
+      <ProSidebar collapsed={isCollapsed}>
         <Menu iconShape="square">
           {/* LOGO AND MENU ICON */}
           <MenuItem
@@ -91,15 +63,8 @@ const ProSidebar = () => {
           {!isCollapsed && (
             <Box mb="25px">
               <Box display="flex" justifyContent="center" alignItems="center">
-                {/* <img
-                  alt="profile-user"
-                  width="100px"
-                  height="100px"
-                  src={user.avatar}
-                  style={{ cursor: "pointer", borderRadius: "50%" }}
-                /> */}
+               
                 <Avatar
-                  // component={RouterLink}
                   src={user.avatar}
                   sx={{
                     cursor: 'pointer',
@@ -139,6 +104,7 @@ const ProSidebar = () => {
               icon={<ContactsOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
+              colors={colors}
             />
             <Typography
               variant="h6"
@@ -149,16 +115,17 @@ const ProSidebar = () => {
             </Typography>
             <Item
               title="Profile Form"
-              to="/user"
+              to="/sign-up"
               icon={<PersonOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
+              colors={colors}
             />
           </Box>
         </Menu>
-      </Sidebar>
+      </ProSidebar>
     </Box>
   );
 };
 
-export default ProSidebar;
+export default Sidebar;

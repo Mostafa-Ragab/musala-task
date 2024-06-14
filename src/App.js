@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import Topbar from "./scenes/global/Topbar";
-import Sidebar from "./scenes/global/Sidebar";
-import SignIn from "./components/SignIn";
-import Flights from "./scenes/flights";
-import User from "./scenes/user";
-import Error from "./scenes/error";
-import Form from "./scenes/form/index";
-import Photo from "./scenes/form/photo";
+import Topbar from "./components/Topbar/Topbar";
+import Sidebar from "./components/sideBar/SideBar";
+import SignIn from "./pages/sign-in/SignIn";
+import Flights from "./pages/flights/Flights";
+import User from "./pages/user";
+import Error from "./pages/error";
+import Form from "./pages/edit-page/index";
+import Photo from "./pages/edit-page/photo";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import { useLocation } from "react-router-dom";
@@ -49,10 +49,8 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         {(location.pathname === '/' || location.pathname === '/login') ? (
-          <div className="app">
-            {/* <Sidebar isSidebar={isSidebar} /> */}
+          <div className="app" >
             <main className="content">
-              {/* <Topbar setIsSidebar={setIsSidebar} /> */}
               <Routes>
                 <Route path="/" element={<SignIn />} />
                 <Route path="/login" element={<SignIn />} />
@@ -73,7 +71,7 @@ function App() {
                 <Route path="/flights/add-flights" element={<Form />} />
                 <Route path="/fligths/edit/:id" element={<Form />} />
                 <Route path="/fligths/edit-photo/:id" element={<Photo />} />
-                <Route path="/user" element={<User />} />
+                <Route path="/sign-up" element={<User />} />
                 <Route path="/404" element={<Error />} />
                 <Route path="*" element={<Error />} />
 

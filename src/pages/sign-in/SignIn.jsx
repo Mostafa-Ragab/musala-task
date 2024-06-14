@@ -1,127 +1,31 @@
-import React, { useState } from 'react';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import UserService from '../scenes/services/user.service'
 import { Formik } from 'formik';
-import * as yup from "yup";
-import { useNavigate, useParams } from 'react-router-dom';
-import { Card, CardMedia } from '@mui/material';
+import { Card } from '@mui/material';
 import Alert from '@mui/material/Alert';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { Helmet } from 'react-helmet';
-
+import useSignIn from './useSignIn';
 const defaultTheme = createTheme();
 
 const SignIn = () => {
-
-  const [message, setMessage] = useState('');
-  const [loading, setLoading] = useState(false);
-
-  const [open, setOpen] = useState(true);
-
-  const initialValues = {
-    email: "",
-    password: ""
-  };
-
-  const checkoutSchema = yup.object().shape({
-    email: yup
-      .string()
-      .required("Email is required")
-      .email("Please enter a valid email"),
-    password: yup
-      .string()
-      .required("Password is required")
-      .min(8, 'Password must be 8 characters long')
-      .matches(/[0-9]/, 'Password requires a number')
-      .matches(/[a-z]/, 'Password requires a lowercase letter')
-      .matches(/[A-Z]/, 'Password requires an uppercase letter')
-      .matches(/[^\w]/, 'Password requires a symbol'),
-  });
-
-  let navigate = useNavigate();
-
-  const login = async (values, setSubmitting) => {
-    const user = {
-      email: values.email,
-      password: values.password,
-    };
-    await UserService.login(user.email, user.password)
-      .then(() => {
-        navigate('/flights', { replace: true });
-      })
-      .catch((error) => {
-        // Manejar errores de solicitud
-        if (error.response) {
-          // Error en respuesta de la API
-          const resMessage = 'Incorrect credentials. The username or password is not correct';
-          // resetForm();
-          setMessage(resMessage);
-        } else if (error.request) {
-          // No recibió respuesta de la API (error de conexión)
-          const resMessage = 'Connection error';
-          setMessage(resMessage);
-        } else {
-          // Error en la configuración de la solicitud
-          const resMessage = 'Error sending request';
-          setMessage(resMessage);
-        }
-        setLoading(false);
-        setSubmitting(false);
-      });
-  }
-
-  const handleFormSubmit = async (values, { setStatus, setSubmitting, resetForm }) => {
-    setStatus()
-    const user = {
-      email: values.email,
-      password: values.password,
-    };
-    await UserService.login(user.email, user.password)
-      .then(() => {
-        navigate('/flights', { replace: true });
-      })
-      .catch((error) => {
-        if (error.response) {
-          const resMessage = 'Incorrect credentials. The username or password is not correct';
-          resetForm();
-          setMessage(resMessage);
-          setOpen(true);
-        } else if (error.request) {
-          const resMessage = 'Connection error';
-          resetForm();
-          setMessage(resMessage);
-          setOpen(true);
-        } else {
-          const resMessage = 'Error sending request';
-          resetForm();
-          setMessage(resMessage);
-          setOpen(true);
-        }
-        setLoading(false);
-        setSubmitting(false);
-      });
-  };
-
+const {open,message,checkoutSchema,loading,initialValues,handleFormSubmit,setOpen} = useSignIn()
+ 
   return (
     <>
       <Helmet>
         <title>Sign in</title>
       </Helmet>
-      <ThemeProvider theme={defaultTheme}>
+      <ThemeProvider  theme={defaultTheme}  className="login-background">
         <Container component="main" maxWidth="xs">
           <CssBaseline />
           <Box
@@ -130,12 +34,9 @@ const SignIn = () => {
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
+            
             }}
           >
-            {/* <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar> */}
-
             <Formik
               onSubmit={handleFormSubmit}
               initialValues={initialValues}
@@ -147,12 +48,8 @@ const SignIn = () => {
                 touched,
                 handleBlur,
                 handleChange,
-                handleSubmit,
-                setFieldValue,
-                setValues,
-                isSubmitting
+                handleSubmit,           
               }) => {
-
                 return (
                   <form onSubmit={handleSubmit}>
                     <Grid
@@ -195,10 +92,7 @@ const SignIn = () => {
                               onBlur={handleBlur}
                               onChange={handleChange}
                             />
-                            {/* <FormControlLabel
-                      control={<Checkbox value="remember" color="primary" />}
-                      label="Remember me"
-                    /> */}
+                   
                             <Button
                               type="submit"
                               fullWidth
@@ -233,18 +127,13 @@ const SignIn = () => {
                                 </Collapse>
                               )}
                             </Box>
-                            {/* <Grid container>
-                      <Grid item xs>
-                        <Link href="#" variant="body2">
-                          Forgot password?
-                        </Link>
-                      </Grid>
+                            <Grid container>
                       <Grid item>
-                        <Link href="#" variant="body2">
-                          {"Don't have an account? Sign Up"}
+                        <Link href="sign-up"  variant="body2">
+                        {"Don't have an account? Sign Up"}
                         </Link>
                       </Grid>
-                    </Grid> */}
+                    </Grid>
                           </Box>
                         </Card>
                       </Grid>
@@ -254,9 +143,7 @@ const SignIn = () => {
               }
               }
             </Formik>
-
           </Box>
-
         </Container>
       </ThemeProvider>
     </>

@@ -1,10 +1,10 @@
 import { Alert, Box, Button, Stack } from "@mui/material";
-import { Formik } from "formik";
+import { useFormik ,Formik} from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import { useState, useEffect } from "react";
-import FlightsService from "../services/flights.service";
+import FlightsService from "../../services/flights.service";
 import { useNavigate, useParams } from 'react-router-dom';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -246,6 +246,8 @@ const Photo = () => {
     //   setSubmitting(false);
     // }, 2000);
   };
+  const formik = useFormik()
+
   useEffect(() => {
     // if (!isAddMode) {
     // get flight and set form fields
@@ -253,7 +255,7 @@ const Photo = () => {
     let img = new String()
     FlightsService.getFlightById(id).then(f => {
       const fields = ['id', 'img', 'status', 'code', 'capacity', 'departureDate'];
-      fields.forEach(field => Formik.setFieldValue(field, f[field], false));
+      fields.forEach(field => formik.setFieldValue(field, f[field], false));
       objeto.id = f.data.id
       objeto.img = f.data.img
       objeto.status = f.data.status
@@ -261,7 +263,7 @@ const Photo = () => {
       objeto.capacity = f.data.capacity
       objeto.departureDate = f.data.departureDate
       img = f.data.img
-      Formik.setValues(f.data);
+      formik.setValues(f.data);
 
       if (img.trim().length !== 0) {
         fetch(`http://localhost:3000/flights/${id}/photo`)

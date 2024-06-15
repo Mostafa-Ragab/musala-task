@@ -153,7 +153,6 @@ const useForm = () => {
   }
 
   const updateFlight = async (id, values, setSubmitting) => {
-    console.log('testttt',setSubmitting)
     const flight = {
       code: values.code,
       capacity: values.capacity,
@@ -181,8 +180,6 @@ const useForm = () => {
   }
 
   const updateFlightWithPhoto = async (id, values, setSubmitting) => {
-
-    console.log("selectedImg", values);
     const formData = new FormData();
 
     formData.append("code", values.code);
@@ -213,8 +210,6 @@ const useForm = () => {
 
   const handleFormSubmit = (values, { setStatus, setSubmitting }) => {
     setStatus();
-    console.log("values", values);
-    console.log("fileIn", fileIn);
     if (isAddMode) {
       if (loadPhoto) {
         createFlightWithPhoto(values, setSubmitting)
@@ -241,7 +236,7 @@ const useForm = () => {
           setCameraIcon(true);
         }
       } catch (error) {
-        console.error('Error al obtener la foto del vuelo', error);
+        console.error('Error getting flight photo', error);
       } finally {
         setLoading(false);
       }
@@ -308,8 +303,8 @@ const useForm = () => {
     flightPhoto,
     isNonMobile,
     handleFormSubmit,
-    
-    initialValues,setInitialValues
+    initialValues,
+    setInitialValues
   };
 
 }

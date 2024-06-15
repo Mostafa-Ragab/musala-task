@@ -5,43 +5,53 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import { useState, useEffect } from "react";
 import FlightsService from "../../services/flights.service";
-import { useNavigate, useParams } from 'react-router-dom';
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
+import { useNavigate, useParams } from "react-router-dom";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 
-import { Card, CardContent, Typography, IconButton } from '@mui/material';
-import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
-import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
-import { styled } from '@mui/system';
-import { Helmet } from 'react-helmet';
-import useForm from './useForm'
+import { Card, CardContent, Typography, IconButton } from "@mui/material";
+import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
+import { styled } from "@mui/system";
+import { Helmet } from "react-helmet";
+import useForm from "./useForm";
 const StyledAddIcon = styled(AddPhotoAlternateIcon)({
-  fontSize: '2em',
-  color: '#fff',
-  cursor: 'pointer',
+  fontSize: "2em",
+  color: "#fff",
+  cursor: "pointer",
 });
 
 const Form = () => {
-
-  const { checkoutSchema,
+  const {
+    initialValues,
+    checkoutSchema,
     showCameraIcon,
-    handleCloseBackdrop,message,handleChoosePhoto,loading,flightPhoto,isNonMobile,handleFormSubmit,initialValues,isAddMode} = useForm()
+    handleCloseBackdrop,
+    message,
+    handleChoosePhoto,
+    loading,
+    flightPhoto,
+    isNonMobile,
+    handleFormSubmit,
+    isAddMode,
+  } = useForm();
 
-  
-
-  
   return (
     <>
       <Helmet>
-        <title>{isAddMode ? 'Create Flight' : 'Edit Flight'}</title>
+        <title>{isAddMode ? "Create Flight" : "Edit Flight"}</title>
       </Helmet>
       <Box m="20px">
-        <Header title={isAddMode ? 'CREATE FLIGHT' : 'EDIT FLIGHT'} subtitle={isAddMode ? 'Create a new flight' : 'Edit a flight'} />
+        <Header
+          title={isAddMode ? "CREATE FLIGHT" : "EDIT FLIGHT"}
+          subtitle={isAddMode ? "Create a new flight" : "Edit a flight"}
+        />
 
         <Formik
           onSubmit={handleFormSubmit}
           initialValues={initialValues}
           validationSchema={checkoutSchema}
+          enableReinitialize={!isAddMode}
         >
           {({
             values,
@@ -50,12 +60,8 @@ const Form = () => {
             handleBlur,
             handleChange,
             handleSubmit,
-            setFieldValue,
-            setValues,
-            isSubmitting
+            isSubmitting,
           }) => {
-           
-
             return (
               <form onSubmit={handleSubmit}>
                 <Box
@@ -63,7 +69,9 @@ const Form = () => {
                   gap="30px"
                   gridTemplateColumns="repeat(4, minmax(0, 1fr))"
                   sx={{
-                    "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
+                    "& > div": {
+                      gridColumn: isNonMobile ? undefined : "span 4",
+                    },
                   }}
                 >
                   <TextField
@@ -108,51 +116,86 @@ const Form = () => {
                     sx={{ gridColumn: "span 4" }}
                   />
 
-                  {
-                    isAddMode &&
-                    (
-                      <Card sx={{ width: 300, bgcolor: 'background.default' }}>
-
-                        <CardContent style={{ height: 300, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#ccc', position: 'relative' }}>
-                          {loading ? (
-                            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 300 }}>
-                              <CircularProgress />
-                            </div>
-                          ) : flightPhoto ? (
-                            <>
-                              <img src={flightPhoto} alt="Flight photo" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                              {showCameraIcon && (
-                                <IconButton
-                                  style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
-                                  onClick={handleChoosePhoto}
-
-                                >
-                                  <PhotoCameraIcon style={{ color: '#fff' }} />
-                                </IconButton>
-                              )}
-                            </>
-                          ) : (
-                            <IconButton
-                              style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
-                              onClick={handleChoosePhoto}
-
-                            >
-                              <StyledAddIcon />
-                            </IconButton>
-                          )}
-                        </CardContent>
-
-                      </Card>
-                    )
-                  }
-                 
-
+                  {isAddMode && (
+                    <Card sx={{ width: 300, bgcolor: "background.default" }}>
+                      <CardContent
+                        style={{
+                          height: 300,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          backgroundColor: "#ccc",
+                          position: "relative",
+                        }}
+                      >
+                        {loading ? (
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              height: 300,
+                            }}
+                          >
+                            <CircularProgress />
+                          </div>
+                        ) : flightPhoto ? (
+                          <>
+                            <img
+                              src={flightPhoto}
+                              alt="Flight"
+                              style={{
+                                width: "100%",
+                                height: "100%",
+                                objectFit: "cover",
+                              }}
+                            />
+                            {showCameraIcon && (
+                              <IconButton
+                                style={{
+                                  position: "absolute",
+                                  top: "50%",
+                                  left: "50%",
+                                  transform: "translate(-50%, -50%)",
+                                  backgroundColor: "rgba(0, 0, 0, 0.5)",
+                                }}
+                                onClick={handleChoosePhoto}
+                              >
+                                <PhotoCameraIcon style={{ color: "#fff" }} />
+                              </IconButton>
+                            )}
+                          </>
+                        ) : (
+                          <IconButton
+                            style={{
+                              position: "absolute",
+                              top: "50%",
+                              left: "50%",
+                              transform: "translate(-50%, -50%)",
+                              backgroundColor: "rgba(0, 0, 0, 0.5)",
+                            }}
+                            onClick={handleChoosePhoto}
+                          >
+                            <StyledAddIcon />
+                          </IconButton>
+                        )}
+                      </CardContent>
+                    </Card>
+                  )}
                 </Box>
                 <Box display="flex" justifyContent="start" mt="20px">
-                  <Button type="submit" color="secondary" variant="contained" disabled={isSubmitting}>
+                  <Button
+                    type="submit"
+                    color="secondary"
+                    variant="contained"
+                    disabled={isSubmitting}
+                  >
                     {isSubmitting ? "Sending..." : "Send"}
                     <Backdrop
-                      sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                      sx={{
+                        color: "#fff",
+                        zIndex: (theme) => theme.zIndex.drawer + 1,
+                      }}
                       open={isSubmitting}
                       onClick={handleCloseBackdrop}
                     >
@@ -162,26 +205,20 @@ const Form = () => {
                 </Box>
                 <Box sx={{ mt: 2 }}>
                   {message && (
-                    <Stack sx={{ width: '100%' }} spacing={2}>
+                    <Stack sx={{ width: "100%" }} spacing={2}>
                       <Alert variant="filled" severity="error">
                         {message}
                       </Alert>
                     </Stack>
                   )}
                 </Box>
-
               </form>
-            )
-          }
-          }
+            );
+          }}
         </Formik>
       </Box>
     </>
-
   );
 };
-
-
-
 
 export default Form;

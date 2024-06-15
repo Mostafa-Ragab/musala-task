@@ -190,8 +190,6 @@ const useFlight = () => {
      handleClosePhoto,
      setImageURL
 
-
-
   }
 }
 

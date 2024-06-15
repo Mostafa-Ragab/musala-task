@@ -44,7 +44,7 @@ api.interceptors.response.use(
       } catch (error) {
         // Handle refresh token error or redirect to login
         // navigate('/login')
-        console.log("logout token caduco");
+        console.log("logout token ");
         window.location.href = '/login';
       }
     }

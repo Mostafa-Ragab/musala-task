@@ -7,10 +7,10 @@ import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, B
 import { Helmet } from 'react-helmet';
 import useFlight from './useFlights'
 import Cards from './flightItems/Cards'
+
 const Flights = () => {
   const { colors, filteredRows, handleAddFlightClick, code, handleSearchChange, open, handleClose, selectedImg, openPhoto, handleClosePhoto, cancelDelete,
     openDeleteDialog, imageURL, setImageURL, confirmDelete,handleEdit, handleDelete, theme, handleEditPhoto, handleView } = useFlight()
-console.log('openDeleteDialog',openDeleteDialog)
   return (
     <>
       <Helmet>

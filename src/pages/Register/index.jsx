@@ -8,9 +8,9 @@ import UserService from "../../services/user.service";
 import { useNavigate, useParams } from 'react-router-dom';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
-import {checkoutSchema} from '../../constants/'
-import useUserData from './useUserData'
-const User = () => {
+import {checkoutSchema} from '../../constants'
+import useUserData from './useRegister'
+const Register = () => {
 
   const {handleFormSubmit,initialValues,message,handleCloseBackdrop,isNonMobile}  = useUserData()
 
@@ -118,4 +118,4 @@ const User = () => {
   );
 };
 
-export default User;
+export default Register;

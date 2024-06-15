@@ -4,7 +4,7 @@ import Topbar from "./components/Topbar/Topbar";
 import Sidebar from "./components/sideBar/SideBar";
 import SignIn from "./pages/sign-in/SignIn";
 import Flights from "./pages/flights/Flights";
-import User from "./pages/user";
+import Register from "./pages/Register";
 import Error from "./pages/error";
 import Form from "./pages/edit-page/index";
 import Photo from "./pages/edit-photo/photo";
@@ -71,7 +71,7 @@ function App() {
                 <Route path="/flights/add-flights" element={<Form />} />
                 <Route path="/fligths/edit/:id" element={<Form />} />
                 <Route path="/fligths/edit-photo/:id" element={<Photo />} />
-                <Route path="/sign-up" element={<User />} />
+                <Route path="/sign-up" element={<Register />} />
                 <Route path="/404" element={<Error />} />
                 <Route path="*" element={<Error />} />
 

@@ -8,85 +8,11 @@ import UserService from "../../services/user.service";
 import { useNavigate, useParams } from 'react-router-dom';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
-
+import {checkoutSchema} from '../../constants/'
+import useUserData from './useUserData'
 const User = () => {
 
-  const checkoutSchema = yup.object().shape({
-    name: yup
-      .string()
-      .required("The name is required"),
-    email: yup
-      .string()
-      .required("The email is required")
-      .email("Please enter a valid email"),
-    password: yup
-      .string()
-      .required("Password is required")
-      .min(8, 'Password must be 8 characters long')
-      .matches(/[0-9]/, 'Password requires a number')
-      .matches(/[a-z]/, 'Password requires a lowercase letter')
-      .matches(/[A-Z]/, 'Password requires an uppercase letter')
-      .matches(/[^\w]/, 'Password requires a symbol'),
-  });
-
-  const initialValues = {
-    name: "",
-    email: "",
-    password: ""
-  };
-
-  const isNonMobile = useMediaQuery("(min-width:600px)");
-  let navigate = useNavigate();
-
-  const [message, setMessage] = useState('');
-  const [loading, setLoading] = useState(false);
-
-  //Backdrop
-  const [openBackdrop, setOpenBackdrop] = useState(false);
-  const [isLoadingBackdrop, setIsLoadingBackdrop] = useState(false);
-
-  const handleCloseBackdrop = () => {
-    if (!isLoadingBackdrop) {
-      setOpenBackdrop(false);
-    }
-  };
-
-  const handleOpenBackdrop = () => {
-    setIsLoadingBackdrop(true);
-    setOpenBackdrop(true);
-  };
-
-  const createUser = async (values, setSubmitting) => {
-    const user = {
-      name: values.name,
-      email: values.email,
-      password: values.password,
-    };
-
-    await UserService.addUser(user)
-      .then(() => {
-        navigate('/flights', { replace: true });
-      })
-      .catch((error) => {
-        if (error.response) {
-          const resMessage = 'The data provided is incorrect. Please try again';
-          setMessage(resMessage);
-        } else if (error.request) {
-          const resMessage = 'Connection error';
-          setMessage(resMessage);
-        } else {
-          const resMessage = 'Error sending request';
-          setMessage(resMessage);
-        }
-        setLoading(false);
-        setSubmitting(false);
-      });
-  }
-
-  const handleFormSubmit = (values, { setStatus, setSubmitting }) => {
-    setStatus();
-    createUser(values, setSubmitting)
-  };
+  const {handleFormSubmit,initialValues,message,handleCloseBackdrop,isNonMobile}  = useUserData()
 
   return (
     <Box m="20px">

@@ -7,7 +7,7 @@ import Flights from "./pages/flights/Flights";
 import User from "./pages/user";
 import Error from "./pages/error";
 import Form from "./pages/edit-page/index";
-import Photo from "./pages/edit-page/photo";
+import Photo from "./pages/edit-photo/photo";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import { useLocation } from "react-router-dom";

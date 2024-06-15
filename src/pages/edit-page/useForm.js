@@ -6,10 +6,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 const useForm = () => {
 
-  const [initialValues,setInitialValues] = useState({  code: "",
+  const [initialValues,setInitialValues] = useState({ 
+     code: "",
     capacity: 0,
     departureDate: "",
-    photo: ""}) 
+    photo: ""})
+
     const { id } = useParams();
     const isAddMode = !id;
 

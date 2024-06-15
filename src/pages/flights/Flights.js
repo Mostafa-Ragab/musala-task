@@ -90,7 +90,7 @@ const Flights = () => {
             </DialogContent>
             <DialogActions>
               <Button onClick={handleClose} color="primary">
-                Cerrar
+                CLose
               </Button>
             </DialogActions>
           </Dialog>
@@ -109,13 +109,13 @@ const Flights = () => {
                     }}
                   />
 
-                  {imageURL && <img src={imageURL} alt="Image preview" style={{ maxWidth: 200, maxHeight: 200 }} />}
+                  {imageURL && <img src={imageURL} alt=" preview" style={{ maxWidth: 200, maxHeight: 200 }} />}
                 </div>
               </DialogContentText>
             </DialogContent>
             <DialogActions>
               <Button onClick={handleClosePhoto} color="primary">
-                Cerrar
+                Close
               </Button>
             </DialogActions>
           </Dialog>

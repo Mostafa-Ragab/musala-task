@@ -13,7 +13,6 @@ body,
 .app {
   display: flex;
   position: relative;
-    background-image: url('./assets/banner.jpg')
 }
 
 ::-webkit-scrollbar {

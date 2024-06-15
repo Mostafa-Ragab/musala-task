@@ -1,11 +1,6 @@
 import { Alert, Box, Button, Stack, TextField } from "@mui/material";
 import { Formik } from "formik";
-import * as yup from "yup";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
-import { useState } from "react";
-import UserService from "../../services/user.service";
-import { useNavigate, useParams } from 'react-router-dom';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import {checkoutSchema} from '../../constants'
@@ -30,8 +25,7 @@ const Register = () => {
           handleBlur,
           handleChange,
           handleSubmit,
-          setFieldValue,
-          setValues,
+          
           isSubmitting
         }) => {
 

@@ -28,13 +28,12 @@ function App() {
         console.log("no existe token-->LOGOUT--", user);
         navigate('/login')
         return;
-      }
+      } 
 
       const decodedToken = jwtDecode(user.token)
       const tokenExpiration = decodedToken.exp
       console.log("decodedToken", decodedToken)
       console.log("decodedToken", tokenExpiration)
-      console.log("decodedToken", Math.floor(Date.now() / 1000))
       // if (tokenExpiration > Math.floor(Date.now() / 1000)) {
       //   console.log("ok")
       //   localStorage.removeItem('user')

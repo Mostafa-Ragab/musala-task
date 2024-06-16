@@ -83,7 +83,7 @@ const Register = () => {
               </Box>
               <Box display="flex" justifyContent="end" mt="20px">
                 <Button type="submit" color="secondary" variant="contained" disabled={isSubmitting}>
-                  {isSubmitting ? "Enviando..." : "Enviar"}
+                  {isSubmitting ? "sending..." : "send"}
                   <Backdrop
                     sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                     open={isSubmitting}

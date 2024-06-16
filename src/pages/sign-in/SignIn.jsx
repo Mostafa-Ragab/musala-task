@@ -130,7 +130,7 @@ const {open,message,checkoutSchema,loading,initialValues,handleFormSubmit,setOpe
                             <Grid container>
                       <Grid item>
                         <Link href="/sign-up"  variant="body2">
-                        {"Don't have an account? Sign Up"}
+                        {"Don't have an account? Sign Up First"}
                         </Link>
                       </Grid>
                     </Grid>

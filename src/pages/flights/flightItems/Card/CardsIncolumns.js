@@ -7,7 +7,6 @@ import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import { IconButton } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
-import useFlight from '../useFlights'
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 
 const Columns = ({handleEdit,handleDelete,handleRowClick, handleModelCange,handleEditPhoto,handleView,filteredRows}) => {
@@ -43,7 +42,6 @@ const Columns = ({handleEdit,handleDelete,handleRowClick, handleModelCange,handl
     {
       field: "view",
       headerName: "View",
-      // width: 150,
       renderCell: (params) => {
         if (params.row.img != "") {
           return (

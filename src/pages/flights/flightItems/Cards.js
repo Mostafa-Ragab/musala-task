@@ -15,9 +15,9 @@ import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import { IconButton } from "@mui/material";
 import CardSmallScreen from "./Card/CardSmallScreen";
 import CardMediumScreen from "./Card/CardMediumScreen";
-import Columns from './columns'
+import Columns from './Card/CardsIncolumns'
 
-const FlightItems = ({ filteredRows,handleEdit, handleDelete, theme, handleEditPhoto, handleView }) => {
+const FlightItems = ({ handleRowClick,handleModelCange,filteredRows,handleEdit, handleDelete, theme, handleEditPhoto, handleView }) => {
 
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const isMediumScreen = useMediaQuery(theme.breakpoints.between("sm", "md"));
@@ -79,7 +79,7 @@ const FlightItems = ({ filteredRows,handleEdit, handleDelete, theme, handleEditP
     {
             (!isSmallScreen && !isMediumScreen) &&
             (
-             <Columns filteredRows={filteredRows} handleEdit={handleEdit} handleDelete={handleDelete} theme={theme} handleEditPhoto={handleEditPhoto} handleView={handleView} />
+             <Columns filteredRows={filteredRows} handleRowClick={handleRowClick} handleModelCange={handleModelCange} handleEdit={handleEdit} handleDelete={handleDelete} theme={theme} handleEditPhoto={handleEditPhoto} handleView={handleView} />
             )
     }
     </>

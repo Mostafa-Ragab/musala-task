@@ -12,7 +12,6 @@ const useFlight = () => {
     const [flights, setFlights] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
     const [pageSize, setPageSize] = useState(5);
-
     const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
     const [selectedFlightId, setSelectedFlightId] = useState(null);
   

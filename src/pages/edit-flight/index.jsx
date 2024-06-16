@@ -1,15 +1,11 @@
 import { Alert, Box, Button, Stack, TextField } from "@mui/material";
-import { Formik, Field, ErrorMessage } from "formik";
-import * as yup from "yup";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import { Formik } from "formik";
 import Header from "../../components/Header";
-import { useState, useEffect } from "react";
-import FlightsService from "../../services/flights.service";
-import { useNavigate, useParams } from "react-router-dom";
+
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 
-import { Card, CardContent, Typography, IconButton } from "@mui/material";
+import { Card, CardContent, IconButton } from "@mui/material";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import { styled } from "@mui/system";

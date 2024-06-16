@@ -1,23 +1,16 @@
-// import axios from 'axios';
-// import authHeader from './auth-header.service';
+
 import api from "./api";
 
 const API_URL = 'http://localhost:3000/'
 
 const addUser = (user) => {
   return api.post(API_URL + 'auth/register', user);
-  // return axios.post(API_URL + 'auth/register', user, { headers: authHeader() });
 };
 
 const currentUser = () => {
   return api.get(API_URL + '/auth/me');
-  // return axios.get(API_URL + '/auth/me', { headers: authHeader() });
 };
 
-// const login = (email, password) => {
-//   return axios.post(API_URL + 'auth/login', { email, password }, {
-//   });
-// };
 
 const login = (email, password) => {
   return api

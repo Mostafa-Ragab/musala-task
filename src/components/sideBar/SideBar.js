@@ -115,7 +115,7 @@ const Sidebar = () => {
             </Typography>
             <Item
               title="Profile Form"
-              to="/sign-up"
+              to="/user"
               icon={<PersonOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

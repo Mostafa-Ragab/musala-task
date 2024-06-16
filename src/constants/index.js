@@ -12,7 +12,7 @@ export const user = {
     token: usuario ? usuario.token : ''
   };
 
-
+  // register checkout schema
   export const checkoutSchema = yup.object().shape({
     name: yup
       .string()
@@ -20,6 +20,22 @@ export const user = {
     email: yup
       .string()
       .required("The email is required")
+      .email("Please enter a valid email"),
+    password: yup
+      .string()
+      .required("Password is required")
+      .min(8, 'Password must be 8 characters long')
+      .matches(/[0-9]/, 'Password requires a number')
+      .matches(/[a-z]/, 'Password requires a lowercase letter')
+      .matches(/[A-Z]/, 'Password requires an uppercase letter')
+      .matches(/[^\w]/, 'Password requires a symbol'),
+  });
+
+
+  export const loginCheckoutSchema = yup.object().shape({
+    email: yup
+      .string()
+      .required("Email is required")
       .email("Please enter a valid email"),
     password: yup
       .string()

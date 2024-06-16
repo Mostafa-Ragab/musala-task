@@ -14,7 +14,12 @@ body,
   display: flex;
   position: relative;
 }
+.login {
+  background-image: url('./assets/banner.jpg');
+  height: 100%;
+  width: 100%;
 
+}
 ::-webkit-scrollbar {
   width: 10px;
 }

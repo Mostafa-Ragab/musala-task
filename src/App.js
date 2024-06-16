@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import {  useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import Topbar from "./components/Topbar/Topbar";
 import Sidebar from "./components/sideBar/SideBar";
 import SignIn from "./pages/sign-in/SignIn";
@@ -11,26 +11,10 @@ import Photo from "./pages/edit-photo/photo";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import ProtectedRoute from "./components/protectedRoute";
+
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
-
-  let navigate = useNavigate();
-
-  useEffect(() => {
-    const checkTokenValidity = () => {
-      const user = JSON.parse(localStorage.getItem("user"));
-      if (!user) {
-        console.log("no existe token-->LOGOUT--", user);
-        navigate("/login");
-        return;
-      }
-
-     
-    
-    };
-    checkTokenValidity();
-  }, []);
 
   return (
     <ColorModeContext.Provider value={colorMode}>
@@ -38,13 +22,14 @@ function App() {
         <CssBaseline />
         <div className="app">
           <Routes>
+          
             <Route path="/" element={<SignIn />} />
             <Route path="/login" element={<SignIn />} />
 
             <Route
               path="/sign-up"
               element={
-                <main className="content">
+                <main className="content login">
                   <Register />
                 </main>
               }

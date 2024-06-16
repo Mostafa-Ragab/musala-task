@@ -30,20 +30,15 @@ const useForm = () => {
 
     //Backdrop
     const [openBackdrop, setOpenBackdrop] = useState(false);
-    const [isLoadingBackdrop, setIsLoadingBackdrop] = useState(false);
   
     const handleCloseBackdrop = () => {
-      if (!isLoadingBackdrop) {
         setOpenBackdrop(false);
-      }
+      
     };
   
-    const handleOpenBackdrop = () => {
-      setIsLoadingBackdrop(true);
-      setOpenBackdrop(true);
-    };
  
   const checkoutSchema = yup.object().shape({
+    //check if the code used before
     code: yup
       .string()
       .required("The code is required")

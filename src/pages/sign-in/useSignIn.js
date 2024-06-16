@@ -1,35 +1,20 @@
 import { useState } from 'react';
-import * as yup from "yup";
 import { useNavigate } from 'react-router-dom';
 import UserService from '../../services/user.service'
-
+import { useEffect } from "react";
+import {loginCheckoutSchema} from '../../constants/'
 
 const useSignIn = () => {
+
+  const initialValues = {
+    email: "",
+    password: ""
+  };
+
     const [message, setMessage] = useState('');
     const [loading, setLoading] = useState(false);
     const [open, setOpen] = useState(true);
-    const initialValues = {
-        email: "",
-        password: ""
-      };
-
-      const checkoutSchema = yup.object().shape({
-        email: yup
-          .string()
-          .required("Email is required")
-          .email("Please enter a valid email"),
-        password: yup
-          .string()
-          .required("Password is required")
-          .min(8, 'Password must be 8 characters long')
-          .matches(/[0-9]/, 'Password requires a number')
-          .matches(/[a-z]/, 'Password requires a lowercase letter')
-          .matches(/[A-Z]/, 'Password requires an uppercase letter')
-          .matches(/[^\w]/, 'Password requires a symbol'),
-      });
-    
-      let navigate = useNavigate();  
-
+    let navigate = useNavigate();
 
       const handleFormSubmit = async (values, { setStatus, setSubmitting, resetForm }) => {
         setStatus()
@@ -63,8 +48,22 @@ const useSignIn = () => {
           });
       };
 
+
+useEffect(() => {
+  const checkTokenValidity = () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
+      navigate("/flights");
+      return;
+    }
+
+   
+  
+  };
+  checkTokenValidity();
+}, []);
       return {
-        checkoutSchema,
+        loginCheckoutSchema,
         message,
         loading,
         open,

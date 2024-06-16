@@ -19,13 +19,15 @@ const defaultTheme = createTheme();
 
 const SignIn = () => {
 const {open,message,checkoutSchema,loading,initialValues,handleFormSubmit,setOpen} = useSignIn()
- 
+
   return (
     <>
       <Helmet>
         <title>Sign in</title>
       </Helmet>
-      <ThemeProvider  theme={defaultTheme}  className="login-background">
+      <div className="login">
+
+      <ThemeProvider  theme={defaultTheme}  >
         <Container component="main" maxWidth="xs">
           <CssBaseline />
           <Box
@@ -146,6 +148,7 @@ const {open,message,checkoutSchema,loading,initialValues,handleFormSubmit,setOpe
           </Box>
         </Container>
       </ThemeProvider>
+      </div>
     </>
   );
 }

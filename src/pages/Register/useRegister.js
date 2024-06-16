@@ -9,12 +9,9 @@ const useUserData = () => {
     email: "",
     password: "",
   };
-
   const isNonMobile = useMediaQuery("(min-width:600px)");
   let navigate = useNavigate();
-
   const [message, setMessage] = useState("");
-  const [loading, setLoading] = useState(false);
 
   //Backdrop
   const [openBackdrop, setOpenBackdrop] = useState(false);
@@ -25,12 +22,6 @@ const useUserData = () => {
       setOpenBackdrop(false);
     }
   };
-
-  const handleOpenBackdrop = () => {
-    setIsLoadingBackdrop(true);
-    setOpenBackdrop(true);
-  };
-
   const createUser = async (values, setSubmitting) => {
     const user = {
       name: values.name,
@@ -53,7 +44,6 @@ const useUserData = () => {
           const resMessage = "Error sending request";
           setMessage(resMessage);
         }
-        setLoading(false);
         setSubmitting(false);
       });
   };

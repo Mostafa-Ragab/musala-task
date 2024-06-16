@@ -15,7 +15,7 @@ import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import { IconButton } from "@mui/material";
 import CardSmallScreen from "./Card/CardSmallScreen";
 import CardMediumScreen from "./Card/CardMediumScreen";
-import Columns from './Card/CardsIncolumns'
+import Columns from './Card/Cardscolumns'
 
 const FlightItems = ({ handleRowClick,handleModelCange,filteredRows,handleEdit, handleDelete, theme, handleEditPhoto, handleView }) => {
 
